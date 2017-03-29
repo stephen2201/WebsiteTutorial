@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Viking Surf Company</title>
+<link rel="stylesheet" type="text/css" href="myStyle.css"/>
+<script type="text/javascript">
+
+function Clock() {
+	var today=new Date();
+	var h=today.getHours();
+	var m=today.getMinutes();
+	var s=today.getSeconds();
+	m = updateTime(m);
+	s = updateTime(s);
+	document.getElementById('clock').innerHTML = h+":"+m+":"+s;
+	var t = setTimeout(function(){Clock()},500);
+	}
+
+function updateTime(i) {
+	if (i<10) {
+		i = "0" + i
+	};  
+	// adds zero to the front of numbers < 10
+	return i;
+	}
+	
+var ul;
+var li_items; 
+var li_number;
+var image_number = 0;
+var slider_width = 0;
+var image_width;
+current = 0;
+function init(){	
+		ul = document.getElementById('image_slider');
+		li_items = ul.children;
+		li_number = li_items.length;
+		for (i = 0; i < li_number; i++){
+				image_width = li_items[i].childNodes[0].clientWidth;
+				slider_width += image_width;
+				image_number++;
+		}
+	
+		ul.style.width = parseInt(slider_width) + 'px';
+		slider(ul);
+	}
+
+function slider(){		
+		animate({
+			delay:17,
+			duration: 7000,
+			delta:function(p){return Math.max(0, -1 + 2 * p)},
+			step:function(delta){
+					ul.style.left = '-' + parseInt(current * image_width + delta * image_width) + 'px';
+				},
+			callback:function(){
+				current++;
+				if(current < li_number-1){
+					slider();
+				}
+				else{
+					var left = (li_number - 1) * image_width;					
+					setTimeout(function(){goBack(left)},2000); 				
+					setTimeout(slider, 4000);
+				}
+			}
+		});
+}
+function goBack(left_limits){
+		current = 0;	
+		setInterval(function(){
+			if(left_limits >= 0){
+				ul.style.left = '-' + parseInt(left_limits) + 'px';
+				left_limits -= image_width / 10;
+			}	
+		}, 17);
+	}
+function animate(opts){
+		var start = new Date;
+		var id = setInterval(function(){
+			var timePassed = new Date - start;
+			var progress = timePassed / opts.duration
+			if(progress > 1){
+				progress = 1;
+			}
+			var delta = opts.delta(progress);
+			opts.step(delta);
+			if (progress == 1){
+				clearInterval(id);
+				opts.callback();
+			}
+		}, opts.dalay || 17);
+	}
+	window.onload = init;
+</script>
+</head>
+<body onload="Clock()">
+
+  
+	<div id="header">
+		 <div id="logo">
+		 <img src= "images/LOGO VIKING.jpg" width= "100%" height= "100%" >
+		 </div>
+        
+		 <div id= "title">
+		<span style="font-family:'viking1';
+		font-size: 50px;">WELCOME TO THE</span>
+		<br>
+		<span style= "font-family: 'viking2';
+		font-size: 50px; color: #8A2908; border: 2px ridge black; background-color: #DBA901;">VIKING SURF COMPANY</span>
+		<br>
+		<span style= "font-family: 'viking1';
+		font-size: 50px;">For all your surfing needs.</span>
+	<div id="clock">
+	</div>
+			
+		 </div>
+		  
+	</div>
+	<p></p>
+	<center><div class="container">
+			<center><div class="image-slider-wrapper">
+				<center><ul id="image_slider">
+					<li><img src="images/bigsurf2.jpg" width="630" height="220"></li>
+					<li><img src="images/strand1.jpg" width="630" height="220"></li>
+					<li><img src="images/bigsurf.jpg" width="630" height="220"></li>
+					<li><img src="images/bigsurf4.jpg" width="630" height="220"></li>
+					<li><img src="images/rossy1.jpg" width="630" height="220"></li>
+					<li><img src="images/bigsurf3.jpg" width="630" height="220"></li>
+					<li><img src="images.bigsurf5.jpg" width="630" height="220"></li>
+				</ul>			
+				<div class="pager"><center>
+				</div>
+			</div>
+		</div><center>
+
+<center>
+
+	<center></div>
+
+		 
+    <div id = "middle">      
+	<div id= "navigation">
+		 <ul>
+			 <a href="index.html"><li><h3>Home</h3></li></a>
+             <br>			 
+             <a href="about.html"><li><h3>About Us</h3></li></a>
+			 <br>
+             <a href="contact.php"><li><h3>Contact Information</h3></li></a>
+			 <br>
+             <a href="offers.html"><li><h3>Special Offers</h3></li></a>
+			 <br>
+             <a href="links.html"><li><h3>Useful Links</h3></li></a>
+		 </ul>
+	</div>
+	
+
+          
+          
+          
+    
+	<div id= "main">
+          <h1 id="mainHead"><span style="font-family:'viking1';
+	font-size: 50px;">Online Surf Shop</h1></span>
+		  <hr width "100%"></hr>
+		  
+		      
+			  <p><h3>This is the place to get all your surf equipment, including, surfboards, wetsuits and accessories.</h3></p>
+			  <p><h3> Be more than prepared for the winter swell with our selection of cold water surfing specialties.</h3></p>
+			  <p><h3>We stock a selection of surfboards, wetsuits and accessories which are effective for cold water winter surfing in Ireland and beyond.</h3></p>
+		  
+		  <hr width "100%"></hr>
+		  <h2 id= "mid">Latest News...</h2>
+		      <p id = "main"><h3>Lots of new stock added with winter fast approaching, be on the lookout for special offers as we make room for new stock!<h3></p>
+		      <img src= "images/VikingSurf.jpg" width= "100%" height= "350" class="imageMain">
+    </div>
+	</div>
+		  <div  id="side">
+		    <h3> <span style= "font-family:'viking1';
+	font-size: 20px;">Surf Essentials</span></h3>
+			 <hr width "100%"></hr>
+			 <p class="essentialsP">Winter Wetsuits</p>
+			 <img src= "images/winter wetsuit.jpg"  class="imageEssential">
+			 
+			 <p class="essentialsP">Short Boards</p>
+			 <img src= "images/surfboard.jpg"  class="imageEssential">
+			 
+			 <p class="essentialsP">Hoods</p>
+			 <img src= "images/wetsuit_hood.jpg" class="imageEssential" >
+			 
+			 <p class="essentialsP">Gloves</p>
+			 <img src= "images/gloves.jpg"  class="imageEssential">
+			 
+			 <p class="essentialsP">Booties</p>
+			 <img class="imageEssential"  src= "images/BOOTIES.jpg">
+			 
+			 
+			
+			
+			</div>
+		  
+  
+	<div id = "footer">
+	     <h3>&copy; Viking Surf Company 2014<br>
+	         Tullyherk, Ballyshannon, Co.Donegal</h3><br>
+	     <p>Stephen Clarke<br>
+		    11427452<br>
+		    Msc Software Development & Design</p>
+	</div>
+
+
+
+		
+	 
+
+   
+              
+          
+ 
+
+  
+  
+
+</body>
+</html>
